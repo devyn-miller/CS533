@@ -1,0 +1,397 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17181,        387]
+NotebookOptionsPosition[     15927,        362]
+NotebookOutlinePosition[     16325,        378]
+CellTagsIndexPosition[     16282,        375]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Load", " ", "the", " ", "data", " ", "from", " ", "the", " ", "file"}], 
+   "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "pathname", "=", 
+     "\"\</Users/devynmiller/Downloads/CHAPMAN MSBCE/SP 24/finance/Serial \
+correlation applications notebook/LHWLinflation.txt\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"LHWL", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"pathname", ",", "\"\<Table\>\""}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Strip", " ", "off", " ", "the", " ", "dates", " ", "from", " ", "the", 
+     " ", "water", " ", "levels"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"waterLevels", "=", 
+     RowBox[{
+      RowBox[{"Transpose", "[", "LHWL", "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "the", " ", "DurbinWatson", " ", "function"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DurbinWatson", "[", "data_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"d", ",", "e"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"d", "=", 
+        RowBox[{"Differences", "[", "data", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"e", "=", 
+        RowBox[{
+         RowBox[{"Rest", "[", "data", "]"}], "-", 
+         RowBox[{"Most", "[", "data", "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Total", "[", 
+         RowBox[{"d", "^", "2"}], "]"}], "/", 
+        RowBox[{"Total", "[", 
+         RowBox[{"e", "^", "2"}], "]"}]}]}]}], "]"}]}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Calculate", " ", "the", " ", "Durbin"}], "-", 
+     RowBox[{"Watson", " ", "statistic"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"durbinWatsonStatistic", "=", 
+     RowBox[{"DurbinWatson", "[", "waterLevels", "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Output", " ", "the", " ", "result"}], "*)"}], 
+   "\[IndentingNewLine]", "durbinWatsonStatistic", "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Plot", " ", "the", " ", "water", " ", "levels"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"waterLevels", ",", 
+     RowBox[{"Joined", "->", "True"}], ",", 
+     RowBox[{"PlotLabel", "->", "\"\<Water Levels Over Time\>\""}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{3.918214441737658*^9},
+ CellLabel->
+  "In[124]:=",ExpressionUUID->"ceb32389-06c6-4c0f-88d3-d2ee344f5883"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Transpose", "nmtx", 
+   "\"The first two levels of \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"LHWLinflation\\\\\\\"\\\", \
+\\\",\\\", \\\"\\\\\\\"=\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"{\\\\\\\"\\\"}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{579.76,\\\\\\\
+\"\\\", \\\",\\\", \\\"\\\\\\\"19.658},\\\\\\\"\\\"}], \\\"}\\\"}], \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{579.82,\\\\\\\"\\\", \\\",\
+\\\", \\\"\\\\\\\"17.500},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.05,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"16.667},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.35,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"12.698},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.68,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"13.281},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.94,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"13.077},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.94,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"17.969},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.74,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"18.462},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.51,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"18.045},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"3775\\\", \\\"\[RightSkeleton]\\\"}]}], \
+\\\"}\\\"}]\\) cannot be transposed.\"", 2, 126, 58, 29785907505603738550, 
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918214447110824*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"1862d320-3423-484a-b073-f01d34058f96"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "partw", 
+   "\"Part \\!\\(\\*RowBox[{\\\"2\\\"}]\\) of \
+\\!\\(\\*RowBox[{\\\"Transpose\\\", \\\"[\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"LHWLinflation\\\\\\\"\\\", \
+\\\",\\\", \\\"\\\\\\\"=\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"{\\\\\\\"\\\"}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{579.76,\\\\\\\
+\"\\\", \\\",\\\", \\\"\\\\\\\"19.658},\\\\\\\"\\\"}], \\\"}\\\"}], \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{579.82,\\\\\\\"\\\", \\\",\
+\\\", \\\"\\\\\\\"17.500},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.05,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"16.667},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.35,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"12.698},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.68,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"13.281},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.94,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"13.077},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.94,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"17.969},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.74,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"18.462},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.51,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"18.045},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"3775\\\", \\\"\[RightSkeleton]\\\"}]}], \\\"}\\\"}], \
+\\\"]\\\"}]\\) does not exist.\"", 2, 126, 59, 29785907505603738550, "Local"},
+  
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918214447121769*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"b395566a-1530-412a-9b3b-44540fe62963"],
+
+Cell[BoxData[
+ TemplateBox[<|"shortenedBoxes" -> TagBox[
+     FractionBox[
+      RowBox[{"Total", "[", 
+        SuperscriptBox[
+         RowBox[{"Differences", "[", 
+           RowBox[{
+             RowBox[{"Transpose", "[", 
+               RowBox[{"{", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"\"LHWLinflation\"", ",", "\"=\"", ",", "\"{\""}],
+                     "}"}], ",", 
+                   TemplateBox[{"3783"}, "OutputSizeLimit`Skeleton"], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"\"{2022.958,\"", ",", "\"578.94}};\""}], "}"}]}],
+                  "}"}], "]"}], "\[LeftDoubleBracket]", "2", 
+             "\[RightDoubleBracket]"}], "]"}], "2"], "]"}], 
+      RowBox[{"Total", "[", 
+        SuperscriptBox[
+         RowBox[{"(", 
+           RowBox[{"2", "-", 
+             RowBox[{"Transpose", "[", 
+               RowBox[{"{", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"\"LHWLinflation\"", ",", "\"=\"", ",", "\"{\""}],
+                     "}"}], ",", 
+                   TemplateBox[{"3783"}, "OutputSizeLimit`Skeleton"], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"\"{2022.958,\"", ",", "\"578.94}};\""}], "}"}]}],
+                  "}"}], "]"}]}], ")"}], "2"], "]"}]], Short[#, 8]& ], "line" -> 
+   129, "sessionID" -> 29785907505603738550, "byteCount" -> 1241352, "size" -> 
+   8, "stored" -> False, "expr" -> Missing["NotStored"], "wrap" -> 
+   OutputSizeLimit`Defer, "version" -> 1|>,
+  "OutputSizeLimitTemplate"]], "Output",
+ CellChangeTimes->{3.9182144471757936`*^9},
+ CellLabel->
+  "Out[129]=",ExpressionUUID->"0b193ec5-b38c-413e-bde6-3c79b5a49399"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "pkspec1", 
+   "\"The expression \\!\\(\\*RowBox[{\\\"False\\\"}]\\) cannot be used as a \
+part specification.\"", 2, 130, 60, 29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.9182144472246847`*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"d889d4ad-9e0a-4f1a-9f33-afbf03466ae8"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "pkspec1", 
+   "\"The expression \\!\\(\\*TagBox[\\\"2\\\", Function[Annotation[Slot[1], \
+\\\"Charting`Private`Tag#2\\\"]]]\\) cannot be used as a part \
+specification.\"", 2, 130, 61, 29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918214447239276*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"44afe4aa-5e8a-4e00-b09a-f22a2c99171d"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "pkspec1", 
+   "\"The expression \\!\\(\\*TagBox[\\\"2\\\", Function[Annotation[Slot[1], \
+\\\"Charting`Private`Tag#2\\\"]]]\\) cannot be used as a part \
+specification.\"", 2, 130, 62, 29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918214447257353*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"3f3f0eda-c82d-42e4-94bc-6e7c83f3ad0b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"pkspec1\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"", 2, 130, 63, 29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918214447260247*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"da03ced5-05fa-424c-a8e5-ad259dbd2ae1"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ListPlot", "lpn", 
+   "\"\\!\\(\\*RowBox[{TagBox[RowBox[{\\\"Transpose\\\", \\\"[\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"\\\\\\\"LHWLinflation\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"=\\\\\\\
+\"\\\", \\\",\\\", \\\"\\\\\\\"{\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{579.76,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"19.658},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{579.82,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"17.500},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.05,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"16.667},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.35,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"12.698},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.68,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"13.281},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.94,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"13.077},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.94,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"17.969},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.74,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"18.462},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"\\\\\\\"{580.51,\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"18.045},\\\\\\\"\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"3775\\\", \\\"\[RightSkeleton]\\\"}]}], \\\"}\\\"}], \
+\\\"]\\\"}], Function[Annotation[Slot[1], \\\"Charting`Private`Tag#1\\\"]]], \
+\\\"\[LeftDoubleBracket]\\\", TagBox[\\\"2\\\", Function[Annotation[Slot[1], \
+\\\"Charting`Private`Tag#2\\\"]]], \\\"\[RightDoubleBracket]\\\"}]\\) is not \
+a list of numbers or pairs of numbers.\"", 2, 130, 64, 29785907505603738550, 
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.9182144472630157`*^9},
+ CellLabel->
+  "During evaluation of \
+In[124]:=",ExpressionUUID->"031a2b21-5d5f-4bc9-80a6-c900f61567aa"],
+
+Cell[BoxData[
+ TemplateBox[<|"shortenedBoxes" -> TagBox[
+     RowBox[{"ListPlot", "[", 
+       RowBox[{
+         RowBox[{
+           RowBox[{"Transpose", "[", 
+             RowBox[{"{", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"\"LHWLinflation\"", ",", "\"=\"", ",", "\"{\""}], 
+                   "}"}], ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{579.76,\"", ",", "\"19.658},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{579.82,\"", ",", "\"17.500},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{580.05,\"", ",", "\"16.667},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{580.35,\"", ",", "\"12.698},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{580.68,\"", ",", "\"13.281},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{580.94,\"", ",", "\"13.077},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{580.94,\"", ",", "\"17.969},\""}], "}"}], ",", 
+                 
+                 RowBox[{"{", 
+                   RowBox[{"\"{580.74,\"", ",", "\"18.462},\""}], "}"}], ",", 
+                 
+                 TemplateBox[{"3767"}, "OutputSizeLimit`Skeleton"], ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.292,\"", ",", "\"579.59},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.375,\"", ",", "\"579.89},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.458,\"", ",", "\"580.05},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.542,\"", ",", "\"580.09},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.625,\"", ",", "\"580.02},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.708,\"", ",", "\"579.76},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.792,\"", ",", "\"579.40},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.875,\"", ",", "\"579.23},\""}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                   RowBox[{"\"{2022.958,\"", ",", "\"578.94}};\""}], "}"}]}], 
+               "}"}], "]"}], "\[LeftDoubleBracket]", "2", 
+           "\[RightDoubleBracket]"}], ",", 
+         TemplateBox[{"1"}, "OutputSizeLimit`Skeleton"], ",", 
+         RowBox[{"PlotLabel", "\[Rule]", 
+           TemplateBox[{"24"}, "OutputSizeLimit`Skeleton"]}]}], "]"}], 
+     Short[#, 8]& ], "line" -> 130, "sessionID" -> 29785907505603738550, 
+   "byteCount" -> 620656, "size" -> 8, "stored" -> False, "expr" -> 
+   Missing["NotStored"], "wrap" -> OutputSizeLimit`Defer, "version" -> 1|>,
+  "OutputSizeLimitTemplate"]], "Output",
+ CellChangeTimes->{3.91821444727089*^9},
+ CellLabel->
+  "Out[130]=",ExpressionUUID->"d531c414-552c-4924-9c9d-6906f49cc5dd"]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{244, Automatic}, {Automatic, 84}},
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a054b517-1242-4f44-8d07-1d988fab6edb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2634, 71, 472, "Input",ExpressionUUID->"ceb32389-06c6-4c0f-88d3-d2ee344f5883"],
+Cell[3217, 95, 1873, 31, 64, "Message",ExpressionUUID->"1862d320-3423-484a-b073-f01d34058f96"],
+Cell[5093, 128, 1931, 32, 64, "Message",ExpressionUUID->"b395566a-1530-412a-9b3b-44540fe62963"],
+Cell[7027, 162, 1714, 38, 101, "Output",ExpressionUUID->"0b193ec5-b38c-413e-bde6-3c79b5a49399"],
+Cell[8744, 202, 388, 9, 28, "Message",ExpressionUUID->"d889d4ad-9e0a-4f1a-9f33-afbf03466ae8"],
+Cell[9135, 213, 445, 10, 28, "Message",ExpressionUUID->"44afe4aa-5e8a-4e00-b09a-f22a2c99171d"],
+Cell[9583, 225, 445, 10, 28, "Message",ExpressionUUID->"3f3f0eda-c82d-42e4-94bc-6e7c83f3ad0b"],
+Cell[10031, 237, 454, 10, 28, "Message",ExpressionUUID->"da03ced5-05fa-424c-a8e5-ad259dbd2ae1"],
+Cell[10488, 249, 2156, 35, 63, "Message",ExpressionUUID->"031a2b21-5d5f-4bc9-80a6-c900f61567aa"],
+Cell[12647, 286, 3264, 73, 170, "Output",ExpressionUUID->"d531c414-552c-4924-9c9d-6906f49cc5dd"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
