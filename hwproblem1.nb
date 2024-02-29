@@ -1,0 +1,291 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11391,        283]
+NotebookOptionsPosition[     10129,        256]
+NotebookOutlinePosition[     10529,        272]
+CellTagsIndexPosition[     10486,        269]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"x_", ",", " ", "a_", ",", " ", "b_", ",", " ", "\[Sigma]_"}], 
+   "]"}], ":=", " ", 
+  RowBox[{"a", " ", "+", " ", 
+   RowBox[{"b", " ", "*", " ", "x"}], " ", "+", " ", 
+   RowBox[{"Random", "[", 
+    RowBox[{"NormalDistribution", "[", 
+     RowBox[{"0", ",", " ", "\[Sigma]"}], "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{3.91702506810231*^9, 3.917025594687531*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"8095deca-bc81-473f-8a15-4179aad176c2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ob", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"0.1", " ", "*", " ", "n"}], ",", " ", 
+       RowBox[{"f", "[", 
+        RowBox[{
+         RowBox[{"0.1", " ", "*", " ", "n"}], ",", " ", "1", ",", " ", "1.5", 
+         ",", "1"}], "]"}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", " ", "1", ",", " ", "200"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.91702562003156*^9, 3.9170256227032127`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"105af148-b801-477c-b974-e9d3b264759a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DurbinWatson", "[", 
+   RowBox[{"N_", ",", " ", "a_", ",", " ", "b_", ",", " ", "\[Sigma]_"}], 
+   "]"}], ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "ob", ",", " ", "r", ",", "D", ",", " ", "y0", ",", " ", "y1", ",", " ", 
+      "p", ",", " ", "e", ",", " ", "de", ",", " ", "e2", ",", " ", "de2", 
+      ",", " ", "r2", ",", " ", "s"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ob", " ", "=", " ", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"n", ",", " ", "a", ",", " ", "b", ",", " ", "\[Sigma]"}], 
+         "]"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", " ", "1", ",", " ", "N"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"r", " ", "=", " ", 
+      RowBox[{"LinearModelFit", "[", 
+       RowBox[{"ob", ",", 
+        RowBox[{"{", "y", "}"}], ",", "y"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"D", " ", "=", " ", 
+      RowBox[{"r", "[", "\"\<DurbinWatsonD\>\"", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"y0", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"r", "[", "\"\<ParameterTable\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", " ", "1", ",", " ", "2", ",", " ", "2"}], "]"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"y1", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"r", "[", "\"\<ParameterTable\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", " ", "1", ",", " ", "3", ",", " ", "2"}], "]"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"p", " ", "=", " ", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"y0", " ", "+", " ", 
+         RowBox[{"y1", " ", "*", "  ", "n"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", " ", "1", ",", " ", "N"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"e", " ", "=", " ", 
+      RowBox[{"ob", " ", "-", " ", "p"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"de", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"Drop", "[", 
+        RowBox[{"e", ",", " ", "1"}], "]"}], " ", "-", " ", 
+       RowBox[{"Drop", "[", 
+        RowBox[{"e", ",", " ", 
+         RowBox[{"-", "1"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"e2", " ", "=", " ", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"e", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", " ", "1", ",", " ", 
+          RowBox[{"Length", "[", "e", "]"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"de2", " ", "=", " ", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"de", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", " ", "1", ",", " ", 
+          RowBox[{"Length", "[", "de", "]"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"de2", "/", "e2"}]}]}], "]"}]}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"074002ba-3f63-4fe4-9e40-428460f3083d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", 
+  RowBox[{"Off", "[", 
+   RowBox[{"General", "::", "munfl"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{3.917025397080082*^9},
+ CellLabel->"In[4]:=",ExpressionUUID->"3e2e5809-4ec0-4530-9230-10aa60cd5e90"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.917026043351461*^9},
+ CellLabel->"Out[4]=",ExpressionUUID->"87f279a9-b5a4-4e71-a715-35d3d9694712"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dStats200", "=", " ", 
+   RowBox[{"ParallelTable", "[", 
+    RowBox[{
+     RowBox[{"DurbinWatson", "[", 
+      RowBox[{"200", ",", " ", "1", ",", " ", "1.5", ",", " ", "1"}], "]"}], 
+     ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", "1", ",", "100000"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{
+  3.9170251203768578`*^9, {3.917025168290099*^9, 3.917025171743869*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"2338e357-f932-4b06-bd3e-e995a91dad8f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dStats200sort", " ", "=", " ", 
+   RowBox[{"Sort", "[", "dStats200", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.917025131258011*^9, 3.917025165730627*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"eaa64e0a-2731-4a30-bdd3-c71060702175"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"dStats200sort", "[", 
+  RowBox[{"[", "5000", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.917025146326361*^9, 3.917025161475701*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"f9a91f6d-0a4a-4ddf-8f5c-faee33c1a094"],
+
+Cell[BoxData["1.7750334497302571`"], "Output",
+ CellChangeTimes->{3.917026138114702*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"3bde369c-e985-4972-8ccf-1ae27a6ff80e"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+   "The", " ", "critical", " ", "value", " ", "for", " ", "sequence", " ", 
+    "lengths", " ", "of", " ", "200", " ", "is", " ", 
+    RowBox[{"1.77503", ".", "This"}], " ", "means", " ", "that", " ", "the", 
+    " ", "critical", " ", "value", " ", "is"}], ",", 
+   RowBox[{"in", " ", "fact"}], ",", 
+   RowBox[{"affected", " ", "by", " ", "sequence", " ", 
+    RowBox[{"length", ".", " ", "The"}], " ", "longer", " ", "the", " ", 
+    "sequence", " ", "length"}], ",", " ", 
+   RowBox[{
+    RowBox[{
+    "the", " ", "greater", " ", "the", " ", "critical", " ", "value", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+       "assuming", " ", "that", " ", "we", " ", "stay", " ", "at", " ", "a", 
+        " ", "5", "%", " ", "test"}], ")"}], ".", "This"}], " ", "critical", 
+     " ", "value", " ", "marks", " ", "the", " ", "threshold", " ", "for", 
+     " ", "rejecting", " ", "the", " ", "null", " ", "hypothesis", " ", "of", 
+     " ", "no", " ", "serial", " ", "correlation", " ", "at", " ", "the", " ",
+      "5", "%", " ", "significance", " ", 
+     RowBox[{"level", ".", " ", "Approximately"}], " ", "5", "%", " ", "of", 
+     " ", "Durbin"}], "-", 
+    RowBox[{
+    "Watson", " ", "statistics", " ", "calculated", " ", "from", " ", 
+     "100"}]}], ",", 
+   RowBox[{
+    RowBox[{"000", " ", "simulations", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"in", " ", "this", " ", "case"}], ",", " ", "5", ",", "000"}], 
+      ")"}], " ", "fall", " ", "below", " ", "this", " ", "critical", " ", 
+     RowBox[{"value", ".", " ", "This"}], " ", "analysis", " ", "involves", 
+     " ", "simulating", " ", "observational", " ", "data", " ", "based", " ", 
+     "on", " ", "a", " ", "linear", " ", "model", " ", "with", " ", "normal", 
+     " ", "distribution", " ", 
+     RowBox[{"noise", ".", " ", "Durbin"}]}], "-", 
+    RowBox[{"Watson", " ", "statistics"}]}], ",", 
+   RowBox[{
+   "measuring", " ", "serial", " ", "correlation", " ", "among", " ", 
+    "residuals", " ", "from", " ", "linear", " ", "regression"}], ",", " ", 
+   RowBox[{
+   "are", " ", "then", " ", "calculated", " ", "for", " ", "each", " ", 
+    "simulated", " ", 
+    RowBox[{"dataset", ".", " ", "Identifying"}], " ", "the", " ", "5"}], ",", 
+   RowBox[{
+   "000", "th", " ", "value", " ", "in", " ", "an", " ", "ascending", " ", 
+    "array", " ", "of", " ", "sorted", " ", "statistics", " ", "determines", 
+    " ", "the", " ", "5", "%", " ", "critical", " ", 
+    RowBox[{"value", ".", " ", "In"}], " ", "conclusion"}], ",", " ", 
+   RowBox[{
+   "because", " ", "I", " ", "increased", " ", "the", " ", "sequence", " ", 
+    "length", " ", "and", " ", "also", " ", "got", " ", "a", " ", "higher", 
+    " ", "critical", " ", "value"}], ",", " ", 
+   RowBox[{
+   "this", " ", "exemplifies", " ", "how", " ", "sequence", " ", "length", 
+    " ", "can", " ", "highly", " ", "affect", " ", "the", " ", "critical", 
+    " ", 
+    RowBox[{"value", "."}]}]}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.91702653660701*^9, 3.917026652449808*^9}, {
+  3.917026781888163*^9, 3.917026781953809*^9}, {3.918165827775753*^9, 
+  3.918165931714242*^9}, {3.918165972102016*^9, 3.918166015585782*^9}, {
+  3.918213043545108*^9, 3.9182130449339314`*^9}, {3.91821310144769*^9, 
+  3.9182131099260883`*^9}, {3.918213146136272*^9, 
+  3.9182131970800467`*^9}},ExpressionUUID->"04b613c1-18b3-4f7a-8b83-\
+1800db81cacd"]
+},
+WindowSize->{1156, 911},
+WindowMargins->{{Automatic, 697}, {Automatic, -10}},
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"3873f9b6-4416-4b01-b9c6-d0aa819d1486"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 504, 11, 30, "Input",ExpressionUUID->"8095deca-bc81-473f-8a15-4179aad176c2"],
+Cell[1065, 33, 603, 16, 30, "Input",ExpressionUUID->"105af148-b801-477c-b974-e9d3b264759a"],
+Cell[1671, 51, 3169, 80, 262, "Input",ExpressionUUID->"074002ba-3f63-4fe4-9e40-428460f3083d"],
+Cell[CellGroupData[{
+Cell[4865, 135, 254, 5, 30, "Input",ExpressionUUID->"3e2e5809-4ec0-4530-9230-10aa60cd5e90"],
+Cell[5122, 142, 310, 6, 34, "Output",ExpressionUUID->"87f279a9-b5a4-4e71-a715-35d3d9694712"]
+}, Open  ]],
+Cell[5447, 151, 512, 13, 30, "Input",ExpressionUUID->"2338e357-f932-4b06-bd3e-e995a91dad8f"],
+Cell[5962, 166, 273, 5, 30, "Input",ExpressionUUID->"eaa64e0a-2731-4a30-bdd3-c71060702175"],
+Cell[CellGroupData[{
+Cell[6260, 175, 236, 4, 30, "Input",ExpressionUUID->"f9a91f6d-0a4a-4ddf-8f5c-faee33c1a094"],
+Cell[6499, 181, 166, 2, 34, "Output",ExpressionUUID->"3bde369c-e985-4972-8ccf-1ae27a6ff80e"]
+}, Open  ]],
+Cell[6680, 186, 3445, 68, 262, "Input",ExpressionUUID->"04b613c1-18b3-4f7a-8b83-1800db81cacd"]
+}
+]
+*)
+
