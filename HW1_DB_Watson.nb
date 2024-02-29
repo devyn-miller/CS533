@@ -1,0 +1,176 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5943,        166]
+NotebookOptionsPosition[      5177,        146]
+NotebookOutlinePosition[      5575,        162]
+CellTagsIndexPosition[      5532,        159]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Load", " ", "the", " ", "data", " ", "from", " ", "the", " ", "file"}], 
+   "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "pathname", "=", 
+     "\"\</Users/devynmiller/Downloads/CHAPMAN MSBCE/SP 24/finance/Serial \
+correlation applications notebook/LHWLinflation.txt\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"LHWL", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"pathname", ",", "\"\<List\>\""}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Strip", " ", "off", " ", "the", " ", "dates", " ", "from", " ", "the", 
+     " ", "water", " ", "levels"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"waterLevels", "=", 
+     RowBox[{
+      RowBox[{"Transpose", "[", "LHWL", "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "the", " ", "DurbinWatson", " ", "function"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DurbinWatson", "[", "data_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"d", ",", "e"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"d", "=", 
+        RowBox[{"Differences", "[", "data", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"e", "=", 
+        RowBox[{
+         RowBox[{"Rest", "[", "data", "]"}], "-", 
+         RowBox[{"Most", "[", "data", "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Total", "[", 
+         RowBox[{"d", "^", "2"}], "]"}], "/", 
+        RowBox[{"Total", "[", 
+         RowBox[{"e", "^", "2"}], "]"}]}]}]}], "]"}]}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Calculate", " ", "the", " ", "Durbin"}], "-", 
+     RowBox[{"Watson", " ", "statistic"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"durbinWatsonStatistic", "=", 
+     RowBox[{"DurbinWatson", "[", "waterLevels", "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Output", " ", "the", " ", "result"}], "*)"}], 
+   "\[IndentingNewLine]", "durbinWatsonStatistic", "\n", "\n"}]}]], "Input",
+ CellChangeTimes->{{3.9182137783623323`*^9, 3.918213787667904*^9}, {
+   3.9182138838744793`*^9, 3.918213889944067*^9}, {3.918213950860281*^9, 
+   3.918213967720181*^9}, 3.918214078034004*^9},
+ CellLabel->
+  "In[118]:=",ExpressionUUID->"a38cc22f-e8d8-47b9-bacf-0882bd47ef5e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Differences", "listrp", 
+   "\"List or SparseArray or structured array expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Differences\\\", \
+\\\"[\\\", \\\"\\\\\\\"{579.76,  19.658},\\\\\\\"\\\", \\\"]\\\"}]\\).\"", 2, 
+   122, 55, 29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918213970814269*^9, 3.918214081340869*^9},
+ CellLabel->
+  "During evaluation of \
+In[118]:=",ExpressionUUID->"95c10cf4-3c8a-433d-95b7-582af9c3d54a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest", "normal", 
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"\\\\\\\"{579.76,  19.658},\\\\\\\"\\\", \\\"]\\\"}]\\).\"", 2, 122, 56, 
+   29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918213970814269*^9, 3.918214081369768*^9},
+ CellLabel->
+  "During evaluation of \
+In[118]:=",ExpressionUUID->"a4ddf0eb-0f79-4c43-b9c0-4ff08f6302ec"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Most", "normal", 
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Most\\\", \\\"[\\\", \
+\\\"\\\\\\\"{579.76,  19.658},\\\\\\\"\\\", \\\"]\\\"}]\\).\"", 2, 122, 57, 
+   29785907505603738550, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.918213970814269*^9, 3.918214081400565*^9},
+ CellLabel->
+  "During evaluation of \
+In[118]:=",ExpressionUUID->"1b833693-7d7e-4bda-b32b-a330417722f2"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"Total", "[", 
+   SuperscriptBox[
+    RowBox[{"Differences", "[", "\<\"{579.76,  19.658},\"\>", "]"}], "2"], 
+   "]"}], 
+  RowBox[{"Total", "[", 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"Most", "[", "\<\"{579.76,  19.658},\"\>", "]"}]}], "+", 
+      RowBox[{"Rest", "[", "\<\"{579.76,  19.658},\"\>", "]"}]}], ")"}], "2"],
+    "]"}]]], "Output",
+ CellChangeTimes->{3.9182139710751657`*^9, 3.918214081404283*^9},
+ CellLabel->
+  "Out[123]=",ExpressionUUID->"76a1d992-880e-44a5-8a8a-7cb2f0b62ee1"]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{804, Automatic}, {Automatic, 15}},
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ceb36ce1-e475-4339-ab34-10fda67b0b75"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2455, 64, 451, "Input",ExpressionUUID->"a38cc22f-e8d8-47b9-bacf-0882bd47ef5e"],
+Cell[3038, 88, 534, 11, 28, "Message",ExpressionUUID->"95c10cf4-3c8a-433d-95b7-582af9c3d54a"],
+Cell[3575, 101, 501, 11, 28, "Message",ExpressionUUID->"a4ddf0eb-0f79-4c43-b9c0-4ff08f6302ec"],
+Cell[4079, 114, 501, 11, 28, "Message",ExpressionUUID->"1b833693-7d7e-4bda-b32b-a330417722f2"],
+Cell[4583, 127, 578, 16, 61, "Output",ExpressionUUID->"76a1d992-880e-44a5-8a8a-7cb2f0b62ee1"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
